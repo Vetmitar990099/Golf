@@ -17,10 +17,7 @@
 #newplayer, #newplayersubmit {
     border-radius: 10px;
 }
-#playerdata {
-    
-}
-#course-and-tee {
-    display: flex;
-    justify-content: space-between;
+.table {
+    margin-left: 2vw;
+    margin-right: 2vw;
 }

@@ -18,11 +18,11 @@
             </form>
         </div>
         <div id="course-and-tee">
-            <div class="course col-lg-6 col-md-6 col-12">
+            <div class="course col-sm-6">
                 <label for="course-select">Select Course</label>
                 <select class="form-control" id="course-select"></select>
             </div>
-            <div class="tee col-12 col-md-6 col-lg-6">
+            <div class="tee col-sm-6">
                 <label for="tee-box-select">Select Tee</label>
                 <select class="form-control" id="tee-box-select"></select>
             </div>
@@ -34,29 +34,29 @@
                       <tr>
                         <th scope="col">Scorecard</th>
                       </tr>
+                      <tr>
+                        <th>HOLES</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                      </tr>
                     </thead>
                     <tbody class='playerrow'>
-                        <tr>
-                            <th>Holes</th>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                          </tr>
                       <tr class='parrow'>
                         <th scope="row">PAR</th>
                       </tr>
@@ -69,6 +69,7 @@
                     </tbody>
                   </table>
             </table>
+            <button type="text" id="setscores">Set Scores</button>
         </div>
     <template id="tabletemplatepar">
             <td id="par">1</td>
@@ -80,7 +81,7 @@
             <td id="hcp">1</td>
     </template>
     <template id="players">
-        <tr>
+        <tr class="playerinfo">
             <th></th>
             <td scope="row" id="playerdata"><input type="text" id="playerinput" placeholder="0"></td>
             <td scope="row" id="playerdata"><input type="text" id="playerinput" placeholder="0"></td>

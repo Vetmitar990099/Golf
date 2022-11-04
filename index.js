@@ -6,17 +6,13 @@ let tabletemplatepar = document.getElementById('tabletemplatepar')
 let players = document.getElementById('players')
 let player = document.getElementById('player')
 let playerform = document.querySelector('.playerform')
+let playerinfo = playerrow.querySelector('.playerinfo')
+let playerinput = playerrow.querySelector('.playerinput')
+let playersdata = []
 
 let playerCount = 0
 let teeBoxSelectHtml = ''
 
-  class Player {
-      constructor(name, scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-          this.name = name;
-          this.id = Util.newGuid('player');
-          this.scores = scores;
-      }
-  }
   // Selecting a course
   async function getAvailableCourses() {
       return fetch('https://golf-courses-api.herokuapp.com/courses/')
@@ -66,14 +62,21 @@ let teeBoxSelectHtml = ''
         var courseId = e.target.value
         const courseInfo = await getCourseInfo(courseId);
         const teeBoxes = courseInfo.holes[0].teeBoxes
-        const par = courseInfo.holes[0].teeBoxes[0].par
-        const holes = courseInfo.holes[0]
-        const element = document.querySelectorAll("td")
+        var element = parrow.querySelectorAll("td")
+        element.forEach(td => {
+          td.remove()
+        })
+        var element = yardrow.querySelectorAll("td")
+        element.forEach(td => {
+          td.remove()
+        })
+        var element = hcprow.querySelectorAll("td")
         element.forEach(td => {
           td.remove()
         })
         renderTeeBoxes(teeBoxes)
         newTableData(courseInfo.holes)
+
     })   
 })()
 
@@ -81,9 +84,10 @@ playerform.addEventListener('submit', e => {
   e.preventDefault()
   const newplayer = document.getElementById("newplayer").value
   if (newplayer == null || newplayer === '') return
-  nplayer = newplayer
-  renderplayernames(nplayer)
-  newplayer.value = null
+  var newplayerdataitem = {name: newplayer, id: Date.now(), scores: new Array(18).fill(0)}
+  playersdata.push(newplayerdataitem)
+
+  renderNewPlayer(newplayerdataitem)
   
 })
 
@@ -92,7 +96,15 @@ function newTableData(holes) {
    const yards = getListOfYards(1, holes)
    const hcp = getListOfHcp(1, holes)
    document.querySelector('#tee-box-select').addEventListener('change', async (e) => {
-    const element = document.querySelectorAll("td")
+    var element = parrow.querySelectorAll("td")
+    element.forEach(td => {
+      td.remove()
+    })
+    var element = yardrow.querySelectorAll("td")
+    element.forEach(td => {
+      td.remove()
+    })
+    var element = hcprow.querySelectorAll("td")
     element.forEach(td => {
       td.remove()
     })
@@ -134,11 +146,30 @@ function renderhcp(hcp){
     hcprow.appendChild(hcpElement);
   })
 }
-function renderplayernames(nplayer){
+function renderNewPlayer(player){
   const playerElement = players.content.querySelector('tr').cloneNode(true);
-  playerElement.querySelector("th").textContent = nplayer.toUpperCase()
+  playerElement.querySelector("th").textContent = player.name.toUpperCase()
   playerrow.appendChild(playerElement);
 }
 
+function getplayerscores(playerinfo) {f
+  if(playerinfo === undefined){
+    console.log('invalidplayerinfo')
+    console.log(playerinfo)
+  }else {
+    playerinfo.forEach(playerinput.textContent)
+      let playerscore = []
+      playerscore += playerinput.textContent 
+  }
+}
+function getTotalPlayerScore(playerId) {
+  const playerDataItem = getPlayerDataItem(playerId);
+  const scores = playerDataItem.scores;
+  
+  return scores.reduce((sum, scoreItem) => sum + scoreItem, 0)
 
+}
 
+function getPlayerDataItem(playerId) {
+  return playersdata.find(p => p.id === playerId)
+}
